@@ -1,0 +1,42 @@
+﻿@model IEnumerable<GlammyStore.Web.Models.SlideViewModel>
+
+<!-- TOP SLIDER -->
+
+@if (Model != null && Model.Count() > 0)
+{
+    var no = 0;
+    <style>
+        @foreach (var slide in Model)
+        {
+            no++;
+            @Html.Raw(".flexslider.top_slider .slide" + no + " { background-image: url(" + @slide.Image + ");}\n");
+        }
+    </style>
+
+    <div class="flexslider top_slider">
+        <ul class="slides">
+            @{var stt = 0; }
+            @foreach (var slide in Model)
+            {
+                stt = stt + 1;
+                var classname = "slide" + stt;
+                <li class="@classname">
+                    <!-- CONTAINER -->
+                    <div class="container">
+                        <div class="flex_caption1">
+                            <p class="title1 captionDelay2 FromTop">@slide.Name</p>
+                            <p class="title2 captionDelay3 FromTop">@slide.Description</p>
+                        </div>
+                        <a class="flex_caption2" href="@slide.URL"><div class="middle">sale<span>shop</span>now</div></a>
+                        <div class="flex_caption3 slide_banner_wrapper">
+                            <a class="slide_banner slide1_banner1 captionDelay4 FromBottom" href="javascript:void(0);"><img src="/Assets/Client/images/slider/slide1_baner1.jpg" alt="" /></a>
+                            <a class="slide_banner slide1_banner2 captionDelay5 FromBottom" href="javascript:void(0);"><img src="/Assets/Client/images/slider/slide1_baner2.jpg" alt="" /></a>
+                            <a class="slide_banner slide1_banner3 captionDelay6 FromBottom" href="javascript:void(0);"><img src="/Assets/Client/images/slider/slide1_baner3.jpg" alt="" /></a>
+                        </div>
+                    </div><!-- //CONTAINER -->
+                </li>
+            }
+        </ul>
+    </div><!-- //TOP SLIDER -->
+}
+

@@ -1,0 +1,33 @@
+﻿@model GlammyStore.Web.Models.HomeViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+    ViewBag.MetaKeyword = Model.MetaKeyword;
+    ViewBag.MetaDescription = Model.MetaDescription;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- HOME -->
+<section id="home" class="padbot0">
+
+    @Html.Action("_HomeSlider")
+
+</section><!-- //HOME -->
+<!-- TOVAR SECTION -->
+@Html.Action("_FeaturedProducts", "Product")
+
+<!-- NEW ARRIVALS -->
+@Html.Action("_LastestProducts", "Product")
+
+<!-- BRANDS -->
+@Html.Action("_brandsCarousel")
+
+<hr class="container">
+<!-- SERVICES SECTION -->
+@Html.Action("_ServicesSection")
+
+<hr class="container">
+
+<!-- RECENT POSTS -->
+@Html.Action("_RecentPosts", "Post")
