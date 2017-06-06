@@ -7,153 +7,152 @@
     ViewBag.Title = pageIndex == 1 ? category.Name : category.Name + " - Trang " + pageIndex;
     ViewBag.MetaKeyword = pageIndex == 1 ? category.MetaKeyword : category.MetaKeyword + " - Trang " + pageIndex;
     ViewBag.MetaDescription = pageIndex == 1 ? category.MetaDescription : category.MetaDescription + " - Trang " + pageIndex;
-    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    Layout = "~/Views/Shared/_ProductLayout.cshtml";
 }
 
-<div class="product-big-title-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="product-bit-title text-center">
-                    <h2>@category.Name - @Model.TotalCount sản phẩm</h2>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@section BreakCrumbs{
+    <!-- BREADCRUMBS -->
+    <section class="breadcrumb women parallax margbot30">
+        <!-- CONTAINER -->
+        <div class="container">
+            <h2>@category.Name</h2>
+        </div><!-- //CONTAINER -->
+    </section><!-- //BREADCRUMBS -->
 
-<div class="breadcrumb-area">
-   <div class="row">
-       <div class="col-xs-12 col-md-6 custom-breadcrumb">
-           <ol class="breadcrumb">
-               <li><a href="/">Trang chủ</a></li>
-               <li class="active">@category.Name</li>
-           </ol>
-       </div>
-       <div class="col-xs-12 col-md-6 custom-breadcrumb">
-           
-           <ul class="sortby-area">
-               <li>Tìm theo:</li>
-               <li class="dropdown">
-                   <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                       Giá<b class="caret"></b>
-                   </a>
-                   <ul class="dropdown-menu sub-menu">
-                       <li><a href="?page=@(Model.Page)&sort=discount">Khuyến mãi</a></li>
-                       <li><a href="?page=@(Model.Page)&sort=price_asc">Thấp - Cao</a></li>
-                       <li><a href="?page=@(Model.Page)&sort=price_des">Cao - Thấp</a></li>
-                   </ul>
-               </li>
-               <li class="dropdown">
-                   <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                       Nhãn hiệu<b class="caret"></b>
-                   </a>
-                   <ul class="dropdown-menu sub-menu">
-                       @{Html.RenderAction("BrandsList", "Product"); }
-                   </ul>
-               </li>
-           </ul>
-       </div>
-   </div>
-</div>
-
-<div class="single-product-area">
-    <div class="zigzag-bottom"></div>
-    <div class="container">
-        <div class="row">
-            @if (Model.Count > 0)
-            {
-                foreach (var product in Model.Items)
-                {
-                    <div class="col-md-3 col-sm-6">
-                        <div class="single-shop-product">
-                            <div class="product-upper">
-                                <img src="@product.Image"  data-html="true" data-toggle="tooltip" title="@product.Description" alt="@product.Name">
-                            </div>
-                            <h2><a href="/product/@(product.Alias)-@(product.ID).htm">@product.Name</a></h2>
-                            <div class="product-carousel-price">
-                                @if (product.PromotionPrice.HasValue && product.PromotionPrice.Value != 0)
-                                {
-                                    <ins>@product.PromotionPrice.Value.ToString("c0")</ins>
-                                    <del>@product.Price.ToString("c0")</del>
-                                }
-                                else
-                                {
-                                    <ins>@product.Price.ToString("c0")</ins>
-                                }
-                            </div>
-
-                            <div class="product-option-shop">
-                                <a href="#" id="btnAddToCart" data-id="@product.ID" class="add_to_cart_button">Thêm vào giỏ</a>
-                                @if (Request.IsAuthenticated)
-                                {
-                                    <a href="javascript:void()" id="add_to_wishlist_button" class="add_to_wishlist_button" data-toggle="tooltip" title="Yêu thích"><i class="fa fa-heart" data-id="@product.ID" id="btnAddWishlist"></i></a>
-                                }
-                                else
-                                {
-                                    <a href="javascript:void()" id="add_to_wishlist_button" class="add_to_wishlist_button" data-toggle="tooltip" title="Yêu thích"><i class="fa fa-heart" data-id="@product.ID" id="btnAddWishlistDisable"></i></a>
-                                }
-                            </div>
-                        </div>
+}
+<!-- //BREADCRUMBS -->
+<!-- SHOP BANNER -->
+<div class="banner_block margbot15 hidden">
+    <a class="banner nobord" href="javascript:void(0);"><img src="/Assets/Client/images/tovar/banner21.jpg" alt="" /></a>
+</div><!-- //SHOP BANNER -->
+<!-- SORTING TOVAR PANEL -->
+<div class="sorting_options clearfix">
+    <!-- COUNT TOVAR ITEMS -->
+    <div class="count_tovar_items">
+        <p>@category.Name</p>
+        <span>@Model.TotalCount sản phẩm</span>
+    </div><!-- //COUNT TOVAR ITEMS -->
+    <!-- TOVAR FILTER -->
+    <div class="product_sort">
+        <p>XẾP THEO</p>
+        <select class="basic">
+            <option value="discount">Khuyến mãi</option>
+            <option>Giá: Thấp - Cao</option>
+            <option>Giá: Cao - Thấp</option>
+            @* ?page=@(Model.Page)&sort=discount *@
+        </select>
+    </div><!-- //TOVAR FILTER -->
+    <!-- PRODUC SIZE -->
+    <div id="toggle-sizes">
+        <a class="view_box active" href="javascript:void(0);"><i class="fa fa-th-large"></i></a>
+        <a class="view_full" href="javascript:void(0);"><i class="fa fa-th-list"></i></a>
+    </div><!-- //PRODUC SIZE -->
+</div><!-- //SORTING TOVAR PANEL -->
+<!-- ROW -->
+<div class="row shop_block">
+    @foreach (var prod in Model.Items)
+    {
+        <!-- TOVAR1 -->
+        <div class="tovar_wrapper col-lg-4 col-md-4 col-sm-6 col-xs-6 col-ss-12 padbot40">
+            <div class="tovar_item clearfix">
+                <div class="tovar_img">
+                    <div class="tovar_img_wrapper">
+                        <img class="img" src="@prod.Image" alt="@prod.Name" />
+                        @* Hình thứ 2 *@
+                        <img class="img_h" src="@prod.Image" alt="@prod.Name" />
                     </div>
-                }
+                    <div class="tovar_item_btns">
+                        <div class="open-project-link"><a class="open-project tovar_view" href="javascript:void(0);" data-url="/product/@(prod.Alias)-@(prod.ID).htm">Xem <span>nhanh</span></a></div>
+                        <a class="add_bag" id="btnAddToCart" data-id="@prod.ID" href="javascript:void(0);" title="Thêm vào giỏ hàng"><i class="fa fa-shopping-cart"></i></a>
+                        <a class="add_lovelist" id="add_to_wishlist_button" data-id="@prod.ID" href="javascript:void(0);" title="Thêm vào danh sách yêu thích"><i class="fa fa-heart"></i></a>
+                    </div>
+                </div>
+                <div class="tovar_description clearfix">
+                    <a class="tovar_title" href="/product/@(prod.Alias)-@(prod.ID).htm">@prod.Name</a>
+                    <span class="tovar_price">
+                        @if (prod.PromotionPrice.HasValue && prod.PromotionPrice.Value != 0)
+                        {
+                            <ins>@prod.PromotionPrice.Value.ToString("c0")</ins>
+                            <br />
+                            <del>@prod.Price.ToString("c0")</del>
+                        }
+                        else
+                        {
+                            <ins>@prod.Price.ToString("c0")</ins>
+                        }
+                    </span>
+                </div>
+                <div class="tovar_content">@Html.Raw(prod.Description)</div>
+            </div>
+        </div><!-- //TOVAR1 -->
+    }
 
-            }
-            else
+</div><!-- //ROW -->
+
+<hr>
+
+<!-- PAGINATION -->
+@if (Model.TotalPages > 1)
+{
+    // Create numeric links
+    var startPageIndex = Math.Max(1, Model.Page - Model.MaxPage / 2);
+    var endPageIndex = Math.Min(Model.TotalPages, Model.Page + Model.MaxPage / 2);
+
+    <div class="clearfix">
+
+        <ul class="pagination">
+            @if (Model.Page > 1)
             {
-                <h3 class="text-danger text-center">Mục này đang cập nhật</h3>
+                <li>
+                    <a href="?page=1" data-toggle="tooltip" title="Trang đầu" aria-label="First">
+                        <i class="fa fa-angle-double-left"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="?page=@(Model.Page-1)" data-toggle="tooltip" title="Trang sau" aria-label="Previous">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                </li>
             }
 
-        </div>
-        @if (Model.TotalPages > 1)
-        {
-            // Create numeric links
-            var startPageIndex = Math.Max(1, Model.Page - Model.MaxPage / 2);
-            var endPageIndex = Math.Min(Model.TotalPages, Model.Page + Model.MaxPage / 2);
-
-            <nav class="text-center">
-                <ul class="pagination">
-                    @if (Model.Page > 1)
-                    {
-                        <li>
-                            <a href="?page=1" data-toggle="tooltip" title="Trang đầu" aria-label="First">
-                                <i class="fa fa-angle-double-left"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="?page=@(Model.Page-1)" data-toggle="tooltip" title="Trang sau" aria-label="Previous">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                        </li>
-                    }
-
-                    @for (int i = startPageIndex; i <= endPageIndex; i++)
-                    {
-                        if (Model.Page == i)
-                        {
-                                <li class="active"><a href="?page=@i" data-toggle="tooltip" title="Trang @i">@i</a></li>
-                            }
-                            else
-                            {
-                                <li><a href="?page=@i" data-toggle="tooltip" title="Trang @i">@i</a></li>
-                            }
-                        }
-                        @if (Model.Page < Model.TotalPages)
-                        {
-                            <li>
-                                <a href="?page=@(Model.Page+1)" data-toggle="tooltip" title="Trang tiếp theo" aria-label="Next">
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="?page=@Model.TotalPages" data-toggle="tooltip" title="Trang cuối" aria-label="Last">
-                                    <i class="fa fa-angle-double-right"></i>
-                                </a>
-                            </li>
-                        }
-                </ul>
-            </nav>
-        }
-
+            @for (int i = startPageIndex; i <= endPageIndex; i++)
+            {
+                if (Model.Page == i)
+                {
+                    <li class="active"><a href="?page=@i" data-toggle="tooltip" title="Trang @i">@i</a></li>
+                }
+                else
+                {
+                    <li><a href="?page=@i" data-toggle="tooltip" title="Trang @i">@i</a></li>
+                }
+            }
+            @if (Model.Page < Model.TotalPages)
+            {
+                <li>
+                    <a href="?page=@(Model.Page+1)" data-toggle="tooltip" title="Trang tiếp theo" aria-label="Next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="?page=@Model.TotalPages" data-toggle="tooltip" title="Trang cuối" aria-label="Last">
+                        <i class="fa fa-angle-double-right"></i>
+                    </a>
+                </li>
+            }
+        </ul><!-- //PAGINATION -->
+        <a class="show_all_tovar" href="javascript:void(0);">show all</a>
     </div>
+    <hr>
+}
+
+
+<div class="padbot60 services_section_description">
+    @Html.Raw(category.Description)
 </div>
+
+<!-- SHOP BANNER -->
+<div class="row top_sale_banners center">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-ss-12"><a class="banner nobord margbot30" href="javascript:void(0);"><img src="/Assets/Client/images/tovar/banner22.jpg" alt="" /></a></div>
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-ss-12"><a class="banner nobord margbot30" href="javascript:void(0);"><img src="/Assets/Client/images/tovar/banner23.jpg" alt="" /></a></div>
+</div><!-- //SHOP BANNER -->

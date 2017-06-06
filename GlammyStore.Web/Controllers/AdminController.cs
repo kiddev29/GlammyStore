@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using GlammyStore.Model.Models;
+using GlammyStore.Data.Models;
 using GlammyStore.Service;
 using GlammyStore.Web.Models;
 

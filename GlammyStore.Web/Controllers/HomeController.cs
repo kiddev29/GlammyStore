@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using GlammyStore.Model.Models;
+using GlammyStore.Data.Models;
 using GlammyStore.Service;
 using GlammyStore.Web.Models;
 using System.Web.Mvc;
@@ -27,6 +27,8 @@ namespace GlammyStore.Web.Controllers
             _brandService = brandService;
             _systemConfigService = systemConfigService;
         }
+
+
         #region Methods
         public ActionResult Index()
         {
@@ -93,7 +95,10 @@ namespace GlammyStore.Web.Controllers
         //[OutputCache(Duration = 3600)]
         public ActionResult _brandsCarousel()
         {
-            return PartialView();
+            var brands = _brandService.GetActivedBrand("");
+            var brandVm = Mapper.Map<IEnumerable<Brand>, IEnumerable<BrandViewModel>>(brands);
+            
+            return PartialView(brandVm);
         }
 
         [ChildActionOnly]

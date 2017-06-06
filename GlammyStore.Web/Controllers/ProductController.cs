@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using GlammyStore.Common;
-using GlammyStore.Model.Models;
+using GlammyStore.Data.Models;
 using GlammyStore.Service;
 using GlammyStore.Service.ExportImport;
 using GlammyStore.Web.Infrastructure.Core;
@@ -114,26 +114,14 @@ namespace GlammyStore.Web.Controllers
             return View(paginationSet);
         }
 
-        public ActionResult Shop(int page = 1, int brandid = 0, string sort = "")
+        public ActionResult Shop()
         {
             StringHelper.pageActive = "shop";
-            int pageSize = int.Parse(ConfigHelper.GetByKey("pageSize"));
-            int totalRow = 0;
-            var product = _productService.GetAllPaging(page, brandid, sort, pageSize, out totalRow);
-            var productVm = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(product);
-            int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
-            ViewBag.SortKey = sort;
 
-            var paginationSet = new PaginationSet<ProductViewModel>()
-            {
-                Items = productVm,
-                MaxPage = int.Parse(ConfigHelper.GetByKey("maxPage")),
-                Page = page,
-                TotalCount = totalRow,
-                TotalPages = totalPage
-            };
+            var catetories = _productCategoryService.GetAll();
+            var catetoriesVn = Mapper.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(catetories);
 
-            return View(paginationSet);
+            return View(catetoriesVn);
         }
 
         [ChildActionOnly]
@@ -204,14 +192,31 @@ namespace GlammyStore.Web.Controllers
         
         public ActionResult _FeaturedProducts()
         {
-            return PartialView();
+            var topSaleProducts = _productService.GetTopSales(6);
+            var topViews = _productService.GetTopView(3);
+            //Mapper
+            var topSaleProductsVm = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(topSaleProducts);
+            var topViewsVm = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(topViews);
+
+            var featuredProductVm = new FeaturedProductViewModel();
+            featuredProductVm.TopViews = topViewsVm;
+            featuredProductVm.TopSaleProducts = topSaleProductsVm;
+
+            return PartialView(featuredProductVm);
         }
 
         public ActionResult _LastestProducts()
         {
-            return PartialView();
+            var lastestProducts = _productService.GetLastest(18);
+            var lastestProductsVm = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(lastestProducts);
+            return PartialView(lastestProductsVm);
         }
 
+
+        public ActionResult _Sidebar()
+        {
+            return PartialView();
+        }
 
         #endregion
     }

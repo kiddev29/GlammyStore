@@ -10,7 +10,7 @@ using GlammyStore.Web.Models;
 using GlammyStore.Web.App_Start;
 using GlammyStore.Service;
 using AutoMapper;
-using GlammyStore.Model.Models;
+using GlammyStore.Data.Models;
 using GlammyStore.Common;
 
 namespace GlammyStore.Web.Controllers

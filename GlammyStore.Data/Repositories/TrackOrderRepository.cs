@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using GlammyStore.Data.Infrastructure;
-using GlammyStore.Model.Models;
+using GlammyStore.Data.Models;
 using System.Linq;
 using GlammyStore.Common.FunctionsCommon;
 

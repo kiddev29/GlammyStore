@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using GlammyStore.Model.Models;
+using GlammyStore.Data.Models;
 using GlammyStore.Service;
 using GlammyStore.Web.Infrastructure.Core;
 using GlammyStore.Web.Infrastructure.Extensions;

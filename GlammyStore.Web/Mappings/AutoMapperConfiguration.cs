@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using GlammyStore.Model.Models;
+using GlammyStore.Data.Models;
 using GlammyStore.Web.API;
 using GlammyStore.Web.Models;
 

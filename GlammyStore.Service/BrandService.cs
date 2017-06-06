@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using GlammyStore.Common.Services.Int64;
 using GlammyStore.Data.Infrastructure;
 using GlammyStore.Data.Repositories;
-using GlammyStore.Model.Models;
+using GlammyStore.Data.Models;
 
 namespace GlammyStore.Service
 {

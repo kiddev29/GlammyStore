@@ -1,5 +1,5 @@
 ﻿using System;
-using GlammyStore.Model.Models;
+using GlammyStore.Data.Models;
 using GlammyStore.Web.Models;
 
 namespace GlammyStore.Web.Infrastructure.Extensions

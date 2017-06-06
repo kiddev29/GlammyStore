@@ -6,7 +6,7 @@ using GlammyStore.Common.Services.Int32;
 using GlammyStore.Common.ViewModels;
 using GlammyStore.Data.Infrastructure;
 using GlammyStore.Data.Repositories;
-using GlammyStore.Model.Models;
+using GlammyStore.Data.Models;
 
 namespace GlammyStore.Service
 {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using GlammyStore.Common;
-using GlammyStore.Model.Models;
+using GlammyStore.Data.Models;
 using GlammyStore.Service;
 using GlammyStore.Web.App_Start;
 using GlammyStore.Web.Models;

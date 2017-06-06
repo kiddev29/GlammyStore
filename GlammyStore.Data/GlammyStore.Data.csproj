@@ -57,6 +57,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstracts\Auditable.cs" />
+    <Compile Include="Abstracts\IAuditable.cs" />
     <Compile Include="Infrastructure\DbFactory.cs" />
     <Compile Include="Infrastructure\Disposable.cs" />
     <Compile Include="Infrastructure\IDbFactory.cs" />
@@ -93,6 +95,35 @@
       <DependentUpon>201706040241269_update-slide-brand.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ApplicationGroup.cs" />
+    <Compile Include="Models\ApplicationRole.cs" />
+    <Compile Include="Models\ApplicationRoleGroup.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\ApplicationUserGroup.cs" />
+    <Compile Include="Models\Brand.cs" />
+    <Compile Include="Models\ContactDetail.cs" />
+    <Compile Include="Models\Error.cs" />
+    <Compile Include="Models\Feedback.cs" />
+    <Compile Include="Models\Footer.cs" />
+    <Compile Include="Models\Menu.cs" />
+    <Compile Include="Models\MenuGroup.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderDetail.cs" />
+    <Compile Include="Models\Page.cs" />
+    <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\PostCategory.cs" />
+    <Compile Include="Models\PostTag.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductCategory.cs" />
+    <Compile Include="Models\ProductTag.cs" />
+    <Compile Include="Models\Slide.cs" />
+    <Compile Include="Models\SupportOnline.cs" />
+    <Compile Include="Models\SystemConfig.cs" />
+    <Compile Include="Models\Tag.cs" />
+    <Compile Include="Models\TrackOrder.cs" />
+    <Compile Include="Models\Vehicle.cs" />
+    <Compile Include="Models\VisitorStatistic.cs" />
+    <Compile Include="Models\Wishlist.cs" />
     <Compile Include="Repositories\ApplicationGroupRepository.cs" />
     <Compile Include="Repositories\ApplicationRoleGroupRepository.cs" />
     <Compile Include="Repositories\ApplicationRoleRepository.cs" />
@@ -133,10 +164,6 @@
     <ProjectReference Include="..\GlammyStore.Common\GlammyStore.Common.csproj">
       <Project>{0dfe4be0-ba36-44fa-862f-3498a973638b}</Project>
       <Name>GlammyStore.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GlammyStore.Model\GlammyStore.Model.csproj">
-      <Project>{c6cc56e5-1d98-4f7c-9726-f4c4a1be901a}</Project>
-      <Name>GlammyStore.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

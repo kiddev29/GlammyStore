@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using GlammyStore.Model.Abstracts;
+using GlammyStore.Data.Abstracts;
 
 namespace GlammyStore.Web.Models
 {

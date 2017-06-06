@@ -1,4 +1,4 @@
-﻿using GlammyStore.Model.Abstracts;
+﻿using GlammyStore.Data.Abstracts;
 using System.Collections.Generic;
 
 namespace GlammyStore.Web.Models

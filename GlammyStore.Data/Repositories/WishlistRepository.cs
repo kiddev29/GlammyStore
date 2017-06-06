@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GlammyStore.Data.Infrastructure;
-using GlammyStore.Model.Models;
+using GlammyStore.Data.Models;
 
 namespace GlammyStore.Data.Repositories
 {

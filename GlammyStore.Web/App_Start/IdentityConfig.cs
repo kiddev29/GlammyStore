@@ -4,7 +4,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using GlammyStore.Data;
-using GlammyStore.Model.Models;
+using GlammyStore.Data.Models;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;

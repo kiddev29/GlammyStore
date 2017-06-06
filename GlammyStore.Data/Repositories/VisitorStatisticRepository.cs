@@ -1,5 +1,5 @@
 ﻿using GlammyStore.Data.Infrastructure;
-using GlammyStore.Model.Models;
+using GlammyStore.Data.Models;
 
 namespace GlammyStore.Data.Repositories
 {

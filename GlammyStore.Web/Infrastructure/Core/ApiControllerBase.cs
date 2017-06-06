@@ -1,4 +1,4 @@
-﻿using GlammyStore.Model.Models;
+﻿using GlammyStore.Data.Models;
 using GlammyStore.Service;
 using System;
 using System.Data.Entity.Infrastructure;

@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GlammyStore.Data.Infrastructure;
 using GlammyStore.Data.Repositories;
-using GlammyStore.Model.Models;
+using GlammyStore.Data.Models;
 using System;
 using System.Linq;
 

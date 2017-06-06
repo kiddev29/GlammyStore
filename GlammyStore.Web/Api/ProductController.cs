@@ -10,7 +10,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Script.Serialization;
 using GlammyStore.Common;
-using GlammyStore.Model.Models;
+using GlammyStore.Data.Models;
 using GlammyStore.Service;
 using GlammyStore.Service.ExportImport;
 using GlammyStore.Web.Infrastructure.Core;

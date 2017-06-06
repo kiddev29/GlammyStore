@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using GlammyStore.Common;
-using GlammyStore.Model.Models;
+using GlammyStore.Data.Models;
 using GlammyStore.Service;
 using GlammyStore.Web.App_Start;
 using GlammyStore.Web.Infrastructure.Extensions;

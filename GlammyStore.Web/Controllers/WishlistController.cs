@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using GlammyStore.Common;
-using GlammyStore.Model.Models;
+using GlammyStore.Data.Models;
 using GlammyStore.Service;
 using GlammyStore.Web.Infrastructure.Core;
 using GlammyStore.Web.Models;

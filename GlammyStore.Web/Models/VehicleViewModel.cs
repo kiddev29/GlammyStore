@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using GlammyStore.Model.Abstracts;
+using GlammyStore.Data.Abstracts;
 
 namespace GlammyStore.Web.Models
 {

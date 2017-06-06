@@ -1318,7 +1318,7 @@ a.add_lovelist:hover {
 }
 .tovar_title {
 	float:left;
-	width:80%;
+	width:68%;
 	display:block;
 	text-transform:uppercase;
 	font-weight:900;
@@ -1334,8 +1334,23 @@ a.add_lovelist:hover {
 	line-height:16px;
 	font-size:14px;
 	color:#666666;
+    
+}
+.tovar_section .tovar_price del,
+.tovar_section .tovar_price ins {
+    display: block;
 }
 
+.tovar_price del, .tovar_price ins{
+    
+    text-decoration: none;
+}
+
+.tovar_price del {
+    color: #999;
+    font-weight: 400;
+    text-decoration: line-through;
+}
 
 
 
@@ -1611,12 +1626,12 @@ a.add_lovelist:hover {
 	margin-top:9px;
 	padding:0;
 }
-#slider1, #slider2 {float:left; padding-right:98px;}
+#slider1, #slider2 {float:left; padding-left:98px;}
 #carousel1,
 #carousel2 {
 	position:absolute;
 	top:0;
-	right:0;
+	left:0;
 	bottom:0;
 	width:80px;
 }

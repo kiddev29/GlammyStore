@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Script.Serialization;
 using GlammyStore.Common.Exceptions;
-using GlammyStore.Model.Models;
+using GlammyStore.Data.Models;
 using GlammyStore.Service;
 using GlammyStore.Web.App_Start;
 using GlammyStore.Web.Infrastructure.Core;

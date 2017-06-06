@@ -6,7 +6,7 @@ using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Web;
 using GlammyStore.Common.Exceptions;
-using GlammyStore.Model.Models;
+using GlammyStore.Data.Models;
 using GlammyStore.Service.ExportImport.Help;
 
 namespace GlammyStore.Service.ExportImport

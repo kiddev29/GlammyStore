@@ -1,262 +1,269 @@
 ﻿@model GlammyStore.Web.Models.ProductViewModel
 @{
-    ViewBag.Title = "Xem sản phẩm " + Model.Name;
+    ViewBag.Title = Model.Name;
     ViewBag.MetaKeyword = Model.MetaKeyword;
     ViewBag.MetaDescription = Model.MetaDescription;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="product-big-title-area">
+
+<!-- BREADCRUMBS -->
+<section class="breadcrumb parallax margbot30"></section>
+<!-- //BREADCRUMBS -->
+<!-- TOVAR DETAILS -->
+<section class="tovar_details padbot70">
+
+    <!-- CONTAINER -->
     <div class="container">
+
+        <!-- ROW -->
         <div class="row">
-            <div class="col-md-12">
-                <div class="product-bit-title text-center">
-                    <h2>Cửa hàng</h2>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="single-product-area">
-    <div class="zigzag-bottom"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
 
-                @using (Ajax.BeginForm("Detail", "Product",
-            new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
-            new { id = "frm-search" }))
-                {
-                    <div class="single-sidebar">
-                        <h2 class="sidebar-title">Tìm nhanh</h2>
-                        <input type="text" name="searchString" id="txtKeyword" placeholder="tìm kiếm sản phẩm...">
-                        <input type="submit" value="GO">
+            <!-- TOVAR DETAILS WRAPPER -->
+            <div class="col-lg-9 col-md-9 tovar_details_wrapper clearfix">
+                <div class="tovar_details_header clearfix margbot35">
+                    @{
+                        var category = (GlammyStore.Web.Models.ProductCategoryViewModel)ViewBag.Category;
+                    }
+                    <h3 class="pull-left"><b>@category.Name</b></h3>
+
+                    <div class="tovar_details_pagination pull-right">
+                        Xem tất cả
+                        <a class="fa fa-angle-right" href="/category/@(category.Alias)-@(category.ID).htm"></a>
                     </div>
-                    <div id="grid-list">
-                        @{ Html.RenderPartial("_AjaxProductList", Model.ListProducts); }
-                    </div>
-                            }
-
-
-                <div class="single-sidebar">
-                    <h2 class="sidebar-title">Recent Posts</h2>
-                    <ul>
-                        <li><a href="">Sony Smart TV - 2015</a></li>
-                        <li><a href="">Sony Smart TV - 2015</a></li>
-                        <li><a href="">Sony Smart TV - 2015</a></li>
-                        <li><a href="">Sony Smart TV - 2015</a></li>
-                        <li><a href="">Sony Smart TV - 2015</a></li>
-                    </ul>
                 </div>
-            </div>
 
-            <div class="col-md-8">
-                <div class="product-content-right">
-                    <ol class="breadcrumb">
-                        <li><a href="/"><i class="fa fa-home"></i> Trang chủ</a></li>
+                <!-- CLEARFIX -->
+                <div class="clearfix padbot40">
+                    <div class="tovar_view_fotos clearfix">
                         @{
-                            var category = (GlammyStore.Web.Models.ProductCategoryViewModel)ViewBag.Category;
-                            <li><a href="/category/@(category.Alias)-@(category.ID).htm">@category.Name</a></li>
-                        }
-                        <li class="active">@Model.Name</li>
-                    </ol>
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="product-images">
-                                <ul id="etalage">
-                                    <li>
-                                        <a href="#">
-                                            <img class="etalage_thumb_image img-responsive" src="@Model.Image" />
-                                            <img class="etalage_source_image img-responsive" src="@Model.Image" />
-                                        </a>
-                                    </li>
-                                    @{
-                                        var images = (List<string>)ViewBag.MoreImages;
-                                        if (images.Count > 0)
+                            var images = (List<string>)ViewBag.MoreImages;
+                            if (images.Count > 0)
+                            {
+                                <div id="carousel2" class="flexslider">
+                                    <ul class="slides">
+                                        @foreach (var img in images)
                                         {
-                                            foreach (var img in images)
-                                            {
-                                                <li>
-                                                    <img class="etalage_thumb_image img-responsive" src="@img" />
-                                                    <img class="etalage_source_image img-responsive" src="@img" />
-                                                </li>
-                                            }
+                                            <li><a href="javascript:void(0);"><img src="@img" alt="" /></a></li>
                                         }
-                                    }
+                                    </ul>
+                                </div>
 
-                                </ul>
+                                <div id="slider2" class="flexslider">
+                                    <ul class="slides">
+                                       @foreach (var img in images)
+                                       {
+                                        <li><a href="javascript:void(0);"><img src="@img" alt="" /></a></li>
+                                       }
+                                    </ul>
+                                </div>
+                            }
+                        }
+                        
+                    </div>
+
+                    <div class="tovar_view_description">
+                        <div class="tovar_view_title">@Model.Name</div>
+                        
+                        <div class="clearfix tovar_information">
+
+                            <p>Lượt xem: <span class="badge text-primary">@Model.ViewCount</span></p>
+
+                            @{
+                                var tags = (IEnumerable<GlammyStore.Web.Models.TagViewModel>)ViewBag.Tags;
+                                int i = 1;
+
+                                if (tags.Count() > 0)
+                                {
+                                <p>
+                                    <span>Tags:</span>
+                                    @foreach (var tag in tags)
+                                    {
+                                        if (i == tags.Count())
+                                        {
+                                            <a href="/products/tags-@(tag.ID).htm">@tag.Name.ToLower().</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/products/tags-@(tag.ID).htm">@tag.Name.ToLower(),</a>
+                                        }
+                                        i++;
+                                    }
+                                </p>
+                                }
+                            }
+                        </div>
+
+                        <div class="clearfix tovar_brend_price">
+                            <div class="pull-left tovar_brend">Giá bán</div>
+                            <div class="pull-right tovar_view_price">
+                                @if (Model.PromotionPrice.HasValue && Model.PromotionPrice.Value != 0)
+                                {
+                                    <ins>@Model.PromotionPrice.Value.ToString("c0")</ins>
+                                    <br />
+                                    <del>@Model.Price.ToString("c0")</del>
+                                }
+                                else
+                                {
+                                    <ins>@Model.Price.ToString("c0")</ins>
+                                }
                             </div>
                         </div>
 
-                        <div class="col-sm-6">
-                            <div class="product-inner">
-                                <h2 class="product-name">@Model.Name</h2>
-                                <div class="product-inner-price">
-                                    @if (Model.PromotionPrice.HasValue && Model.PromotionPrice.Value != 0)
+                        <div class="tovar_view_btn">
+                            <select class="basic">
+                                @if (Model.Quantity > 0)
+                                {
+                                    for (var q = 1; q <= Model.Quantity; q++)
                                     {
-                                        <ins>@Model.PromotionPrice.Value.ToString("c0")</ins>
-                                        <del>@Model.Price.ToString("c0")</del>
+                                        <option>@q</option>
+                                    }
+
+                                }
+                                else
+                                {
+                                    <option value="">Hết hàng</option>
+                                }
+                            </select>
+                            <a class="add_bag" data-id="@Model.ID" href="javascript:void(0);"><i class="fa fa-shopping-cart"></i>MUA NGAY</a>
+                            <a class="add_lovelist" data-id="@Model.ID" href="javascript:void(0);"><i class="fa fa-heart"></i></a>
+                        </div>
+
+
+                        <div class="tovar_shared clearfix">
+                            <p>Chia sẻ với bạn bè </p>
+                            <ul>
+                                <li><a class="facebook" href="javascript:void(0);"><i class="fa fa-facebook"></i></a></li>
+                                <li><a class="twitter" href="javascript:void(0);"><i class="fa fa-twitter"></i></a></li>
+                                <li><a class="linkedin" href="javascript:void(0);"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a class="google-plus" href="javascript:void(0);"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a class="tumblr" href="javascript:void(0);"><i class="fa fa-tumblr"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div><!-- //CLEARFIX -->
+                <!-- TOVAR INFORMATION -->
+                <div class="tovar_information">
+                    <ul class="tabs clearfix">
+                        <li class="current">Chi tiết sản phẩm</li>
+                        <li>Đánh giá</li>
+                    </ul>
+                    <div class="box visible">
+                        @Html.Raw(Model.Description)
+                    </div>
+                    <div class="box">
+                        <ul class="comments">
+                            <li>
+                                <div class="clearfix">
+                                    <p class="pull-left"><strong><a href="javascript:void(0);">John Doe</a></strong></p>
+                                    <span class="date">2013-10-09 09:23</span>
+                                    <div class="pull-right rating-box clearfix">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+                                </div>
+                                <p>Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit. Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante eu lacus.Vestibulum libero nisl, porta vel, scelerisque eget, malesuada at, neque.</p>
+                            </li>
+                            <li>
+                                <div class="clearfix">
+                                    <p class="pull-left"><strong><a href="javascript:void(0);">John Doe</a></strong></p>
+                                    <span class="date">2013-10-09 09:23</span>
+                                    <div class="pull-right rating-box clearfix">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                </div>
+                                <p>Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit. Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante eu lacus.Vestibulum libero nisl, porta vel, scelerisque eget, malesuada at, neque.</p>
+
+                                <ul>
+                                    <li>
+                                        <p><strong><a href="javascript:void(0);">Jane Doe</a></strong></p>
+                                        <p>Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit. Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante eu lacus.Vestibulum libero nisl, porta vel, scelerisque eget, malesuada at, neque.</p>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <h3>Viết nhận xét của bạn</h3>
+                        <p>Hãy dành ít phút để ghi lại nhận xét của bạn về sản phẩm này, giúp mọi người có được thông tin chính xác để lựa chọn sản phẩm</p>
+                        <div class="clearfix">
+                            <textarea id="review-textarea"></textarea>
+                            <label class="pull-left rating-box-label">Đánh giá:</label>
+                            <div class="pull-left rating-box clearfix">
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            </div>
+                            <input type="submit" class="dark-blue big" value="Gửi đánh giá">
+                        </div>
+                    </div>
+                </div><!-- //TOVAR INFORMATION -->
+            </div><!-- //TOVAR DETAILS WRAPPER -->
+            <!-- SIDEBAR TOVAR DETAILS -->
+            @{
+                var relatedProducts = (IEnumerable<GlammyStore.Web.Models.ProductViewModel>)ViewBag.RelatedProducts;
+            }
+            <div class="col-lg-3 col-md-3 sidebar_tovar_details">
+                <h3><b>Sản phẩm liên quan</b></h3>
+                <ul class="tovar_items_small clearfix">
+                    
+                    @if (relatedProducts.Count() > 0)
+                    {
+                        foreach (var rl_product in relatedProducts)
+                        {
+                            <li class="clearfix">
+                                <img class="tovar_item_small_img" src="@rl_product.Image" alt="@rl_product.Name" />
+                                <a href="/product/@(rl_product.Alias)-@(rl_product.ID).htm" class="tovar_item_small_title">@rl_product.Name</a>
+                                <span class="tovar_item_small_price">
+                                    @if (rl_product.PromotionPrice.HasValue && rl_product.PromotionPrice.Value != 0)
+                                    {
+                                        <ins>@rl_product.PromotionPrice.Value.ToString("c0")</ins>
+                                        <del>@rl_product.Price.ToString("c0")</del>
                                     }
                                     else
                                     {
-                                        <ins>@Model.Price.ToString("c0")</ins>
+                                        <ins>@rl_product.Price.ToString("c0")</ins>
                                     }
-                                </div>
-
-                                <form action="" method="post" class="cart">
-                                    <div class="input-group">
-                                        @if (Model.Quantity > 0)
-                                        {
-                                            <p>Số lượng trong kho: <span class="badge text-success">@Model.Quantity</span></p>
-                                        }
-                                        else
-                                        {
-                                            <p class="text-danger">Hết hàng.</p>
-                                        }
-                                        <p>Lượt xem: <span class="badge text-primary">@Model.ViewCount</span></p>
-                                        <button id="btnAddToCart" data-id="@Model.ID" type="submit">Thêm vào giỏ</button>
-                                    </div>
-                                </form>
-                                @{
-                                    var tags = (IEnumerable<GlammyStore.Web.Models.TagViewModel>)ViewBag.Tags;
-                                    int i = 1;
-                                }
-                                <div class="product-inner-category">
-                                    <p>
-                                        Danh mục:
-                                        <a href="/category/@(category.Alias)-@(category.ID).htm">@category.Name</a>.
-
-                                        @if (tags.Count() > 0)
-                                        {
-                                            <span>Tags:</span>
-                                            foreach (var tag in tags)
-                                            {
-                                                if (i == tags.Count())
-                                                {
-                                                    <a href="/products/tags-@(tag.ID).htm">@tag.Name.ToLower().</a>
-                                                }
-                                                else
-                                                {
-                                                    <a href="/products/tags-@(tag.ID).htm">@tag.Name.ToLower(),</a>
-                                                }
-                                                i++;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <span>Tags:</span>
-                                            <a href="javascripts:void();" class="text-center text-danger no-underline">Không có thẻ gán cho sản phẩm này.</a>
-                                        }
-                                    </p>
-                                </div>
-
-                                <div role="tabpanel">
-                                    <ul class="product-tab" role="tablist">
-                                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Mô tả</a></li>
-                                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Đánh giá</a></li>
-                                    </ul>
-                                    <div class="tab-content">
-                                        <div role="tabpanel" class="tab-pane fade in active" id="home">
-                                            <h2>Mô tả sản phẩm</h2>
-                                            <p>@Html.Raw(Model.Description)</p>
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane fade" id="profile">
-                                            <h2>Đánh giá</h2>
-                                            <div class="submit-review">
-                                                <p><label for="name">Tên</label> <input name="name" type="text"></p>
-                                                <p><label for="email">Email</label> <input name="email" type="email"></p>
-                                                <div class="rating-chooser">
-                                                    <p>Đánh giá của bạn</p>
-
-                                                    <div class="rating-wrap-post">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                </div>
-                                                <p><label for="review">Nhận xét</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>
-                                                <p><input type="submit" value="Hoàn tất"></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    @{
-                        var relatedProducts = (IEnumerable<GlammyStore.Web.Models.ProductViewModel>)ViewBag.RelatedProducts;
+                                </span>
+                            </li>
+                        }
                     }
-                    @if (relatedProducts.Count() > 0)
-                    {
-                        <div class="related-products-wrapper">
-                            <h2 class="related-products-title">Sản phẩm liên quan</h2>
-                            <div class="related-products-carousel">
-                                @foreach (var rl_product in relatedProducts)
-                                {
-                                    <div class="single-product">
-                                        <div class="product-f-image">
-                                            <img src="@rl_product.Image" alt="@rl_product.Name">
-                                            <div class="product-hover">
-                                                <a href="#" class="action-box">
-                                                    <i class="fa fa-shopping-cart add-to-cart" id="btnAddToCart" data-id="@rl_product.ID" data-toggle="tooltip" title="Thêm vào giỏ"></i>
-                                                    @if (Request.IsAuthenticated)
-                                                    {
-                                                        <i class="fa fa-heart" id="btnAddWishlist" data-id="@rl_product.ID" data-toggle="tooltip" title="Yêu thích"></i>
-                                                    }
-                                                    else
-                                                    {
-                                                        <i class="fa fa-heart" id="btnAddWishlistDisable" data-id="@rl_product.ID" data-toggle="tooltip" title="Yêu thích"></i>
-                                                    }
-                                                </a>
-                                                <a href="/product/@(rl_product.Alias)-@(rl_product.ID).htm" data-toggle="tooltip" data-html="true" title="@rl_product.Description" class="view-details-link"><i class="fa fa-link"></i> Xem chi tiết</a>
-                                            </div>
-                                        </div>
 
-                                        <h2><a href="/product/@(rl_product.Alias)-@(rl_product.ID).htm">@rl_product.Name</a></h2>
+                </ul>
+            </div><!-- //SIDEBAR TOVAR DETAILS -->
 
-                                        <div class="product-carousel-price">
-                                            @if (rl_product.PromotionPrice.HasValue && rl_product.PromotionPrice.Value != 0)
-                                            {
-                                                <ins>@rl_product.PromotionPrice.Value.ToString("c0")</ins>
-                                                <del>@rl_product.Price.ToString("c0")</del>
-                                            }
-                                            else
-                                            {
-                                                <ins>@rl_product.Price.ToString("c0")</ins>
-                                            }
-                                        </div>
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+        </div><!-- //ROW -->
+    </div><!-- //CONTAINER -->
+</section><!-- //TOVAR DETAILS -->
+<!-- BANNER SECTION -->
+<section class="banner_section">
 
-@section scripts{
-    @Scripts.Render("~/js/etalage")
-    <script src="~/Assets/Client/js/ajaxPaging.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
+    <!-- CONTAINER -->
+    <div class="container">
 
-            $('#etalage').etalage({
-                thumb_image_width: 300,
-                thumb_image_height: 300,
-                source_image_width: 500,
-                source_image_height: 550,
-                show_hint: true,
-                click_callback: function (image_anchor, instance_id) {
-                    @*alert("Bạn đang xem " +@Model.Name +".");*@
-                }
-            });
+        <!-- ROW -->
+        <div class="row">
 
+            <!-- BANNER WRAPPER -->
+            <div class="banner_wrapper">
+                <!-- BANNER -->
+                <div class="col-lg-9 col-md-9">
+                    <a class="banner type4 margbot40" href="javascript:void(0);"><img src="/Assets/Client/images/tovar/banner4.jpg" alt="" /></a>
+                </div><!-- //BANNER -->
+                <!-- BANNER -->
+                <div class="col-lg-3 col-md-3">
+                    <a class="banner nobord margbot40" href="javascript:void(0);"><img src="/Assets/Client/images/tovar/banner5.jpg" alt="" /></a>
+                </div><!-- //BANNER -->
+            </div><!-- //BANNER WRAPPER -->
+        </div><!-- //ROW -->
+    </div><!-- //CONTAINER -->
+</section><!-- //BANNER SECTION -->
 
-        });
-    </script>
-}
+@Html.Action("_LastestProducts")
+

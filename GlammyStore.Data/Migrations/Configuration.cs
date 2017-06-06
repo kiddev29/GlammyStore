@@ -3,7 +3,7 @@
     using Common;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
-    using Model.Models;
+    using Data.Models;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity.Migrations;

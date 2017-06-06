@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using System.Web.Mvc;
 using GlammyStore.Common;
-using GlammyStore.Model.Models;
+using GlammyStore.Data.Models;
 using GlammyStore.Service;
 using GlammyStore.Web.Infrastructure.Extensions;
 using GlammyStore.Web.Models;

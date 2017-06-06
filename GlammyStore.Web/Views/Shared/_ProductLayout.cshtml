@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title | Glammy </title>
+    <meta name="description" content="@ViewBag.MetaDescription">
+    <meta name="keywords" content="@ViewBag.MetaKeyword">
+
+    <link rel="shortcut icon" href="/Assets/Client/images/favicon.ico">
+    <!-- CSS -->
+    @Styles.Render("~/css/core")
+    <!-- FONTS -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+
+    <!-- PRELOADER -->
+    <div id="preloader"><img src="/Assets/Client/images/preloader.gif" alt="Loading..." /></div>
+    <!-- //PRELOADER -->
+    <div class="preloader_hide">
+
+        <!-- PAGE -->
+        <div id="page">
+
+            <!-- HEADER -->
+            @Html.Action("_Header", "Home")
+
+            @RenderSection("BreakCrumbs", required: false)
+
+            <!-- SHOP BLOCK -->
+            <section class="shop">
+
+                <!-- CONTAINER -->
+                <div class="container">
+
+                    <!-- ROW -->
+                    <div class="row">
+
+                        <!-- SIDEBAR -->
+                        <div id="sidebar" class="col-lg-3 col-md-3 col-sm-3 padbot50">
+
+                            @Html.Action("_Sidebar", "Product")
+
+                        </div>
+
+                        <!-- SHOP PRODUCTS -->
+                        <div class="col-lg-9 col-sm-9 col-sm-9 padbot20">
+
+                            @RenderBody()
+
+                        </div>
+
+                    </div><!-- //ROW -->
+                </div><!-- //CONTAINER -->
+            </section><!-- //SHOP -->
+
+            @RenderSection("Fullwidth", false)
+
+            <!-- FOOTER -->
+            @Html.Action("_Footer", "Home")
+
+        </div><!-- //PAGE -->
+    </div>
+
+    <!-- TOVAR MODAL CONTENT -->
+    <div id="modal-body" class="clearfix">
+        <div id="tovar_content"></div>
+        <div class="close_block"></div>
+    </div><!-- TOVAR MODAL CONTENT -->
+
+    <!-- SCRIPTS -->
+    <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <!--[if IE]><html class="ie" lang="en"> <![endif]-->
+
+    @Scripts.Render("~/js/jquery")
+    @Scripts.Render("~/js/core")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

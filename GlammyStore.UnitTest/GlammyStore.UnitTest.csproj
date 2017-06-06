@@ -80,10 +80,6 @@
       <Project>{62e44a07-9b2d-4aff-aa4f-3734c33c08aa}</Project>
       <Name>GlammyStore.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GlammyStore.Model\GlammyStore.Model.csproj">
-      <Project>{c6cc56e5-1d98-4f7c-9726-f4c4a1be901a}</Project>
-      <Name>GlammyStore.Model</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GlammyStore.Service\GlammyStore.Service.csproj">
       <Project>{29093b10-b51b-4482-8bf8-b5a6a9f65fff}</Project>
       <Name>GlammyStore.Service</Name>
